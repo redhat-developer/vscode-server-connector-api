@@ -1,3 +1,8 @@
+export interface ServerInfo {
+    host: string;
+    port: number;
+}
+
 export interface RSPType {
     id: string;
     visibilename: string;
