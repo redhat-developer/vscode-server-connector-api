@@ -1,5 +1,5 @@
-import { RSPState } from "../util/types";
+import { RSPServer } from "../util/types";
 export interface RSPProviderAPI {
-    registerRSPProvider(rsp: RSPState): Promise<void>;
+    registerRSPProvider(rsp: RSPServer): Promise<void>;
     deregisterRSPProvider(id: string): Promise<void>;
 }
