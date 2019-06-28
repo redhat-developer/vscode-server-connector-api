@@ -1,6 +1,6 @@
 {
   "name": "vscode-server-connector-api",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "out/index.js",
   "types": "out/index.d.ts",
