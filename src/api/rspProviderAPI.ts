@@ -1,4 +1,4 @@
-import { RSPServer } from "../util/types";
+import { RSPServer } from '../util/types';
 
 export interface RSPProviderAPI {
     registerRSPProvider(rsp: RSPServer): Promise<void>;

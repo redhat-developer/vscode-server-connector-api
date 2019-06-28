@@ -1,5 +1,5 @@
-import { RSPProviderAPI } from "./rspProviderAPI";
-import { API } from "..";
+import { RSPProviderAPI } from './rspProviderAPI';
+import { API } from '..';
 
 export interface RSPProviderAPIWrapper {
     /**

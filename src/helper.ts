@@ -3,7 +3,6 @@ import { SERVER_CONNECTOR_EXTENSION_ID } from './constants';
 import * as vscode from 'vscode';
 import { RSPProviderAPI } from './api/rspProviderAPI';
 
-
 class Lazy<T> {
     private value: T | undefined = undefined;
     constructor(private readonly fn: () => T) {}
@@ -16,11 +15,12 @@ class Lazy<T> {
 }
 
 export class ExtensionHelper implements Extension {
-    private readonly apiBroker = new Lazy<Promise<APIBroker | undefined>>(() => getBroker());
+    private readonly apiBroker = new Lazy<Promise<APIBroker | undefined>>(getBroker);
     async getCore(): Promise<API<any>> {
         const apiBroker = await this.apiBroker.get();
         if (!apiBroker) {
-            return { available: false, reason: "extension-not-available" };
+            return { available: false,
+                reason: 'extension-not-available' };
         }
         return apiBroker.get();
     }

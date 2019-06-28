@@ -1,7 +1,6 @@
-import { ExtensionHelper } from "./helper";
-import { RSPProviderAPIWrapper } from "./api/rspProviderAPIWrapper";
-import { RSPProviderAPI } from "./api/rspProviderAPI";
-
+import { ExtensionHelper } from './helper';
+import { RSPProviderAPIWrapper } from './api/rspProviderAPIWrapper';
+import { RSPProviderAPI } from './api/rspProviderAPI';
 
 export const extension: Extension = new ExtensionHelper();
 
@@ -10,13 +9,13 @@ export { SERVER_CONNECTOR_EXTENSION_ID } from './constants';
 /**
  * Provides access to the Server Connector extension's RSP Provider API.
  */
-export interface Extension {    
-    getCore(): Promise<API<any>>    
+export interface Extension {
+    getCore(): Promise<API<any>>;
     get<T>(): Promise<API<T>>;
     /**
      * Provides access to the Server Connector extension's RSP Provider API.
      */
-    readonly RSPProvider: RSPProviderAPIWrapper; 
+    readonly RSPProvider: RSPProviderAPIWrapper;
 }
 
 /**
@@ -28,7 +27,7 @@ export interface APIUnavailable {
      */
     readonly available: false;
     /**
-     * The reason the API was unavailable.  
+     * The reason the API was unavailable.
      * 'extension-not-available': Visual Studio Code could not activate the Server Connector extension,
      *   for example because it was not installed. Your extension should declare the Server Connector
      *   extension as a dependency; you can also prompt the user to install the Server Connector extension.
@@ -65,7 +64,7 @@ export type API<T> = APIAvailable<T> | APIUnavailable;
  */
 export interface APIBroker {
     /**
-     * Gets an API object for RSP Provider within Server Connector extension    
+     * Gets an API object for RSP Provider within Server Connector extension
      */
     get(): API<RSPProviderAPI>;
 }

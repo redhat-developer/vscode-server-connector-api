@@ -1,4 +1,4 @@
-import { ServerInfo } from "../util/types";
+import { ServerInfo } from '../util/types';
 
 export interface ServerAPI {
     startRSP(stdoutCallback: (data: string) => void, stderrCallback: (data: string) => void ): Promise<ServerInfo>;

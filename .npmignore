@@ -1,0 +1,7 @@
+lib/**/*.map
+src/
+test/
+tsconfig.json
+tslint.json
+.vscode/
+lib/test/
