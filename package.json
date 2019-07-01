@@ -1,11 +1,12 @@
 {
   "name": "vscode-server-connector-api",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
-  "main": "out/index.js",
-  "types": "out/index.d.ts",
+  "main": "lib/src/main.js",
+  "types": "lib/src/main.d.ts",
   "files": [
-    "out/**/*"
+    "lib/src/**/*.js",
+    "lib/src/**/*.d.ts"
   ],
   "scripts": {
     "prepare": "node ./node_modules/vscode/bin/install && npm run compile",
