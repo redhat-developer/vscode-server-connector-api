@@ -12,8 +12,3 @@ export interface RSPServer {
     type: RSPType;
     state: number;
 }
-
-export interface ServerInfo {
-    host: string;
-    port: number;
-}
