@@ -1,7 +1,7 @@
 import { Extension, APIBroker, API } from '.';
 import { SERVER_CONNECTOR_EXTENSION_ID } from './constants';
 import * as vscode from 'vscode';
-import { RSPProviderAPI } from './api/rspProviderAPI';
+import { RSPModel } from './api/rspModel';
 
 class Lazy<T> {
     private value: T | undefined = undefined;
@@ -28,8 +28,8 @@ export class ExtensionHelper implements Extension {
         const api = await this.getCore();
         return api as API<T>;
     }
-    readonly RSPProvider = readonlify({
-        api: this.get<RSPProviderAPI>()
+    readonly manager = readonlify({
+        unwrapped: this.get<RSPModel>()
     });
 }
 

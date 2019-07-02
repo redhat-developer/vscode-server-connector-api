@@ -1,6 +1,6 @@
 import { ExtensionHelper } from './helper';
-import { RSPProviderAPIWrapper } from './api/rspProviderAPIWrapper';
-import { RSPProviderAPI } from './api/rspProviderAPI';
+import { RSPModelWrapper } from './api/rspModelWrapper';
+import { RSPModel } from './api/rspModel';
 
 export const extension: Extension = new ExtensionHelper();
 
@@ -15,7 +15,7 @@ export interface Extension {
     /**
      * Provides access to the Server Connector extension's RSP Provider API.
      */
-    readonly RSPProvider: RSPProviderAPIWrapper;
+    readonly manager: RSPModelWrapper;
 }
 
 /**
@@ -66,5 +66,5 @@ export interface APIBroker {
     /**
      * Gets an API object for RSP Provider within Server Connector extension
      */
-    get(): API<RSPProviderAPI>;
+    get(): API<RSPModel>;
 }
