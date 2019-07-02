@@ -1,7 +1,7 @@
 /**
  * Server Connector extension ID.
  */
-export const SERVER_CONNECTOR_EXTENSION_ID = 'redhat.vscode-server-connector';
+export const SERVER_CONNECTOR_EXTENSION_ID = 'redhat.vscode-rsp-ui';
 
 /**
  * Constants representing the state of the server itself or the state of publishing to the server
