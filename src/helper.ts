@@ -1,49 +1,23 @@
-import { Extension, APIBroker, API } from '.';
+import { API } from '.';
 import { SERVER_CONNECTOR_EXTENSION_ID } from './constants';
 import * as vscode from 'vscode';
-import { RSPModel } from './api/rspModel';
 
-class Lazy<T> {
-    private value: T | undefined = undefined;
-    constructor(private readonly fn: () => T) {}
-    get(): T {
-        if (this.value === undefined) {
-            this.value = this.fn();
-        }
-        return this.value;
-    }
-}
-
-export class ExtensionHelper implements Extension {
-    private readonly apiBroker = new Lazy<Promise<APIBroker | undefined>>(getBroker);
-    async getCore(): Promise<API<any>> {
-        const apiBroker = await this.apiBroker.get();
-        if (!apiBroker) {
-            return { available: false,
-                reason: 'extension-not-available' };
-        }
-        return apiBroker.get();
-    }
-    async get<T>(): Promise<API<T>> {
-        const api = await this.getCore();
-        return api as API<T>;
-    }
-    readonly manager = readonlify({
-        unwrapped: this.get<RSPModel>()
-    });
-}
-
-function readonlify<T>(t: T): Readonly<T> {
-    return t;
-}
-
-async function getBroker(): Promise<APIBroker | undefined> {
-    const extension = vscode.extensions.getExtension<APIBroker>(SERVER_CONNECTOR_EXTENSION_ID);
-    console.log('extension inside npm' + (extension === undefined).toString());
+async function activateExtension(): Promise<API | undefined>  {
+    const extension = vscode.extensions.getExtension<API>(SERVER_CONNECTOR_EXTENSION_ID);
     if (!extension) {
         return undefined;
     }
-    const apiBroker = await extension.activate();
-    console.log('apiBroker inside npm' + (apiBroker === undefined).toString());
-    return apiBroker;
+    const api = await extension.activate();
+    return api;
+}
+
+export async function getAPI(): Promise<API> {
+    const api = await activateExtension();
+    if (!api) {
+        return {
+            available: false,
+            reason: 'extension-not-available'
+        };
+    }
+    return api;
 }
