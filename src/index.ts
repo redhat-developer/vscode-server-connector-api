@@ -1,22 +1,9 @@
-import { ExtensionHelper } from './helper';
-import { RSPModelWrapper } from './api/rspModelWrapper';
 import { RSPModel } from './api/rspModel';
+import { getAPI } from './helper';
 
-export const extension: Extension = new ExtensionHelper();
+export const extension = getAPI();
 
 export { SERVER_CONNECTOR_EXTENSION_ID } from './constants';
-
-/**
- * Provides access to the Server Connector extension's RSP Provider API.
- */
-export interface Extension {
-    getCore(): Promise<API<any>>;
-    get<T>(): Promise<API<T>>;
-    /**
-     * Provides access to the Server Connector extension's RSP Provider API.
-     */
-    readonly manager: RSPModelWrapper;
-}
 
 /**
  * The result of unsuccessfully requesting the API from the Server Connector extension.
@@ -39,7 +26,7 @@ export interface APIUnavailable {
 /**
  * The result of successfully requesting the API from the Server Connector extension.
  */
-export interface APIAvailable<T> {
+export interface APIAvailable {
     /**
      * Contains the boolean value true, indicating that the requested API was available.
      */
@@ -47,7 +34,7 @@ export interface APIAvailable<T> {
     /**
      * The API interface from the Server Connector extension.
      */
-    readonly api: T;
+    readonly api: RSPModel;
 }
 
 /**
@@ -55,16 +42,4 @@ export interface APIAvailable<T> {
  * or an indication of why the API is not available. Use the 'available' property to
  * distinguish the two cases.
  */
-export type API<T> = APIAvailable<T> | APIUnavailable;
-
-/**
- * The type of the Server Connector extension's raw API.
- * If you activate the extension directly using the Visual Studio Code
- * extensions API, the result will be an APIBroker instance.
- */
-export interface APIBroker {
-    /**
-     * Gets an API object for RSP Provider within Server Connector extension
-     */
-    get(): API<RSPModel>;
-}
+export type API = APIAvailable | APIUnavailable;
