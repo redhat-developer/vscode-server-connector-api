@@ -15,7 +15,3 @@ before_install:
 install:
 - npm install
 - npm run build
-
-script:
-- npm test
-- npm run coverage:upload
