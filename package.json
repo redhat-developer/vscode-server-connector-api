@@ -13,7 +13,7 @@
     "build": "rimraf lib && tslint -p tslint.json && tsc",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"No tests have been provided yet\"",
     "coverage:upload": "codecov -f coverage/*.json"
   },
   "nyc": {
