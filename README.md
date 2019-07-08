@@ -1,8 +1,7 @@
 # vscode-server-connector-api
 
-TODO FIX these lines, they are not accurate
-[![Build Status](https://travis-ci.org/redhat-developer/rsp-client.svg?branch=master)](https://travis-ci.org/redhat-developer/rsp-client)
-[![NPM version](https://img.shields.io/npm/v/rsp-client.svg)](https://www.npmjs.com/package/rsp-client)
+[![Build Status](https://travis-ci.org/redhat-developer/vscode-server-connector-api.svg?branch=master)](https://travis-ci.org/redhat-developer/vscode-server-connector-api)
+[![NPM version](https://img.shields.io/npm/v/vscode-server-connector-api.svg)](https://www.npmjs.com/package/vscode-server-connector-api)
 
 A simple shared library for the vscode-server-connector and any extensions to it to provide a shared API between the two. 
 
