@@ -16,16 +16,30 @@ node('rhel8') {
         sh "npm run build"
     }
 
-    stage('Package') {
-        sh "npm pack"
+    stage('Package') {sh "npm pack"
+        def packageJson = readJSON file: 'package.json'
         def packs = findFiles(glob: '**.tgz')
-        sh "mv ./${packs[0].name} ./vscode-server-connector-api-latest.tgz"
+        def packName = "vscode-server-connector-api-${packageJson.version}-${env.BUILD_NUMBER}.tgz"
+        sh "mv ${packs[0].name} ${packName}"
+        sh "ln -s ${packName} vscode-server-connector-api-latest.tgz"
     }
 
     if (params.UPLOAD_LOCATION) {
         stage('Snapshot') {
             def filesToPush = findFiles(glob: '**.tgz')
-            sh "rsync -Pzrlt --rsh=ssh --protocol=28 ${filesToPush[0].path} ${UPLOAD_LOCATION}/snapshots/vscode-middleware-tools/vscode-server-connector-api/"
+            for (i = 0; i < filesToPush.length; i++) {
+                sh "rsync -Pzrlt --rsh=ssh --protocol=28 ${filesToPush[i].path} ${UPLOAD_LOCATION}/snapshots/vscode-middleware-tools/vscode-server-connector-api/"
+            }
+        }
+    }
+
+    if (publish.equals('true')) {
+        stage('Publish to NPM') {
+            withCredentials([[$class: 'StringBinding', credentialsId: 'npm-token', variable: 'TOKEN']]) {
+                sh "echo registry=https://registry.npmjs.com > .npmrc"
+                sh "echo //registry.npmjs.com/:_authToken=${TOKEN} >> .npmrc"
+                sh "npm publish"
+            }
         }
     }
 }
