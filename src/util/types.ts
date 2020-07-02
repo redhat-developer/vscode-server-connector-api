@@ -3,6 +3,7 @@ import { RSPModel } from '../api/rspModel';
 export interface ServerInfo {
     host: string;
     port: number;
+    spawned?: boolean;
 }
 
 export interface RSPType {
